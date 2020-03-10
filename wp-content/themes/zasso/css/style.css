@@ -1,0 +1,9 @@
+#breadcrumbs li {
+    display: inline-block;
+}
+#breadcrumbs li::before {
+    content: ">";
+}
+#breadcrumbs li:first-child::before {
+    content: none;
+}
