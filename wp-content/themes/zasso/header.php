@@ -13,7 +13,7 @@
 <div id="wrap">
 <header>
     <h1 class="logo">
-        <?php bloginfo('name'); ?>
+        <a href="<?php echo home_url();?>"><?php bloginfo('name'); ?></a>
     </h1>
     <?php if (has_nav_menu('global-menu')) { //管理画面からメニュー登録する時用のコード?>
         <?php add_globalmenu(); ?>
