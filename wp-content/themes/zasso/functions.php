@@ -1,6 +1,4 @@
 <?php
-
-
 load_theme_textdomain( 'zasso', get_template_directory().'/languages' );
 
 /*------------------------------------*\
@@ -11,6 +9,7 @@ require_once locate_template('block/functions-include.php', true);
 
 // 初期にインストールさせるプラグイン設定
 require_once locate_template('settings/tgmpa.php', true);
+
 // あまり変更しない触らない関数たち
 require_once locate_template('settings/settings-import.php', true);
 
@@ -27,14 +26,14 @@ if (function_exists('add_theme_support')) {
     // 特定の大きさのサムネイルが必要なとき用使い方→ the_post_thumbnail('custom-size');
     add_image_size('custom-size', 300, 200, true); // 任意の数値を設定
 
-    //RSSの出力をON
-    add_theme_support('automatic-feed-links');
 
     //タイトルタグ使用をサポート（wp_headに自動でtitleタグが入ります）
     add_theme_support('title-tag');
+    function custom_document_title_separator( $sep ) {
+        return '|';
+    }
+    add_filter( 'document_title_separator', 'custom_document_title_separator' );
 
-    // Wordpressが生成するhtmlにHTML5タグの仕様を許可
-    add_theme_support('html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption'));
 }
 
 /*------------------------------------*\
@@ -87,7 +86,7 @@ add_action('wp_enqueue_scripts', 'header_style_script');
 //指定のjsにdefer（レンダリングブロック防止の記述）をつける。
 function add_defer_script($tag, $handle, $url)
 {
-    if ('themescripts' === $handle) {
+    if ('mainscripts' === $handle) {
         $tag = '<script src="' . esc_url($url) . '" defer></script>';
     }
     return $tag;
@@ -100,7 +99,6 @@ function style_type_remove($tag)
 {
     return preg_replace('~\s+type=["\'][^"\']++["\']~', '', $tag);
 }
-
 add_filter('style_loader_tag', 'style_type_remove');
 
 
@@ -231,6 +229,17 @@ if (function_exists('bcn_display_list')) {
 /*------------------------------------*\
    カスタム追加設定 additional functions
 \*------------------------------------*/
+
+//category-label　カテゴリslugをclass名として出力
+function categories_label() {
+    $cats = get_the_category();
+    foreach($cats as $cat){
+        echo '<li><a href="'.get_category_link($cat->term_id).'" ';
+        echo 'class="cat_label cat_'.esc_attr($cat->slug).'">';
+        echo esc_html($cat->name);
+        echo '</a></li>';
+    }
+}
 
 
 

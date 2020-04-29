@@ -87,7 +87,8 @@ function remove_category_rel_from_category_list($thelist)
 
 add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 
-
+// Wordpressが生成するhtmlにHTML5タグの仕様を許可
+add_theme_support('html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption'));
 
 /*------------------------------------*\
     管理画面・ログイン時の動作 admin
@@ -133,3 +134,9 @@ remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 remove_action('wp_head', 'wp_render_title_tag', 1);
+
+//RSSの出力をON
+//add_theme_support('automatic-feed-links');の代わり、コメントフィード削除版
+add_action('wp_head', function() {
+    printf('<link rel="alternate" type="application/rss+xml" title="%s" href="%s">%s', get_bloginfo('name'), get_bloginfo('rss2_url'), "\n");
+});
