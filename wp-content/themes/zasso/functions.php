@@ -12,6 +12,8 @@ require_once locate_template('settings/tgmpa.php', true);
 
 // あまり変更しない触らない関数たち
 require_once locate_template('settings/settings-import.php', true);
+require_once locate_template('settings/ogp.php', true);
+
 
 /*------------------------------------*\
 	テーマ機能設定 add_theme_support
