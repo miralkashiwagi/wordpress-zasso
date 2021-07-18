@@ -4,7 +4,7 @@
     <meta charset="<?php bloginfo('charset'); ?>"/>
     <meta name="viewport" content="width=device-width">
     <meta name="format-detection" content="telephone=no">
-    <meta name="description" content="<?php if(wp_title('', false)):?><?php bloginfo('name'); ?>の<?php echo trim(wp_title('', false)); ?>のページです。<?php endif;?><?php bloginfo('description'); ?>">
+<!--    <meta name="description" content="--><?php //if(wp_title('', false)):?><!----><?php //bloginfo('name'); ?><!--の--><?php //echo trim(wp_title('', false)); ?><!--のページです。--><?php //endif;?><!----><?php //bloginfo('description'); ?><!--">-->
     <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/img/icons/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri(); ?>/img/icons/apple-touch-icon.png">
     <?php wp_head(); ?>
